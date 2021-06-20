@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from display.point import Point
+from .point import Point
 
 class IDraw(ABC):
     @abstractmethod
@@ -23,5 +23,5 @@ class IWindow(IDraw, ABC):
     def reDraw(self):
         pass
 
-class IMainUI(ABC):
+class IMainUi(ABC):
     pass
