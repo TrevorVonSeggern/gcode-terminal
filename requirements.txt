@@ -1,1 +1,3 @@
 mock
+git+https://gitlab.com/tvo/py-dependency-injection.git#master@egg=easy_inject
+configparser
