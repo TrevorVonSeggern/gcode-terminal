@@ -1,7 +1,7 @@
 from display.point import Point
-from display.IDraw import IDraw
+from display.abstractions import IWindow, IDraw
 
-class Window(IDraw):
+class Window(IWindow):
     def __init__(self, p: Point, w: int, h: int, draw: IDraw):
         self.point = p if p is not None else Point.Zero
         self.width = w if w is not None else 1
@@ -9,22 +9,21 @@ class Window(IDraw):
         self._draw = draw
         self._lines = []
 
-    def draw(self, content: str, point: Point):
-        self._draw.draw(content, self.point + point)
-
-    def writeLine(self, line: str):
-        if line == None or str.isspace(line):
-            return
-        if len(line) > self.width:
-            line = line.split(0, self.width)
-        self._lines.append(line)
+    def draw(self, line: str, point: Point):
         if len(self._lines) >  self.height:
             self._lines.pop(0)
             self.reDraw()
         else:
             self.draw(line, Point(0, len(self._lines) - 1))
 
+    def writeLine(self, line: str):
+        self._lines.append(line)
+        self._draw.draw(line, self.point + point)
+        # if line == None or str.isspace(line):
+            # return
+
     def reDraw(self):
+        # move cursor?
         pass
 
     def __repr__(self):

@@ -1,11 +1,11 @@
 from functools import cached_property
 import json
 from service import *
+from display import IMainUi
 
 class Program:
-    def __init__(self, a: ServiceA, b: ServiceB):
-        self.a = a
-        self.b = b
+    def __init__(self, ui: IMainUi):
+        self.ui = ui
 
     @cached_property
     def configuration(self):
@@ -13,7 +13,5 @@ class Program:
             return json.load(f)
 
     def Run(self):
-        print(self.a.color)
-        print(self.b.color)
         print('run')
 

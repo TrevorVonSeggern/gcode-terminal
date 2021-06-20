@@ -27,7 +27,7 @@ class TestPoint(unittest.TestCase):
         display.draw.assert_called_once_with('hello world', Point.One)
 
     def test_write_callsDraw(self):
-        # given
+        # Given
         display = Mock()
         window = Window(Point.One, 10, 10, display)
 
@@ -35,7 +35,18 @@ class TestPoint(unittest.TestCase):
         window.writeLine('hi')
 
         # Then
-        display.draw.assert_called_once()
+        display.draw.assert_called_once_with('hi', Point.Zero)
+
+    def test_draw_WithPositionZero(self):
+        # Given
+        display = Mock()
+        window = Window(Point.One, 10, 10, display)
+
+        # When
+        window.draw('hi', Position.Zero)
+
+        # Then
+        display.draw.assert_called_once_with('hi', Point.Zero)
 
     def test_write_None_doesNotCallDraw(self):
         # Given
